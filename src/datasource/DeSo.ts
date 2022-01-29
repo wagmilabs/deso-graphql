@@ -1,6 +1,7 @@
+require('dotenv').config();
 import axios from 'axios';
 
-const DEFAULT_NODE = 'https://diamondapp.com';
+const DEFAULT_NODE = process.env.NODE_API_URL || 'https://diamondapp.com';
 
 class DeSo {
   public nodeUrl: string;
