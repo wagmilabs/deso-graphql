@@ -15,6 +15,7 @@ const typeDefs = `
   type Post {
     PostHashHex: String!
     Body: String
+    ImageURLs: [String]!
     Poster: User!
     RepostedPost: Post
 

@@ -3,6 +3,19 @@ import Posts from '../datasource/Posts';
 
 const resolvers = {
   Post: {
+    ImageURLs: (parent) => {
+      // We need to do some data cleaning to always return an array of strings
+
+      if (parent.ImageURLs === null) {
+        return [];
+      }
+
+      if (!Array.isArray(parent.ImageURLs)) {
+        return [parent.ImageURLs];
+      }
+
+      return parent.ImageURLs.filter((url) => url);
+    },
     Poster: async (parent, args, context) => {
       const users = new Users();
 
