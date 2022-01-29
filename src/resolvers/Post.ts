@@ -3,6 +3,19 @@ import Posts from '../datasource/Posts';
 
 const resolvers = {
   Post: {
+    VideoURLs: (parent) => {
+      // We need to do some data cleaning to always return an array of strings
+
+      if (parent.VideoURLs === null) {
+        return [];
+      }
+
+      if (!Array.isArray(parent.VideoURLs)) {
+        return [parent.VideoURLs];
+      }
+
+      return parent.VideoURLs.filter((url) => url);
+    },
     ImageURLs: (parent) => {
       // We need to do some data cleaning to always return an array of strings
 

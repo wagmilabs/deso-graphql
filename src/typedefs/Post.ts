@@ -3,12 +3,10 @@
  *
  * AdditionalCoinRoyaltiesMap: {}
     AdditionalDESORoyaltiesMap: {}
-    ImageURLs: null
     ParentPosts: null
     ParentStakeID: ""
     PostEntryReaderState: {}
     PostExtraData: {}
-    VideoURLs: null
  */
 
 const typeDefs = `
@@ -16,6 +14,7 @@ const typeDefs = `
     PostHashHex: String!
     Body: String
     ImageURLs: [String]!
+    VideoURLs: [String]!
     Poster: User!
     RepostedPost: Post
 
