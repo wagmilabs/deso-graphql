@@ -1,6 +1,10 @@
-# DeSoQl
+# DeSo GraphQL
 
 A DeSo GraphQL wrapper sitting on top of the DeSo HTTP API.
+
+# What is DeSo (Decentralized Social)
+
+DeSo is a new type of blockchain designed to power Web 3.0 decentralized social networks. Since its inception in 2019, DeSo aims to solve the problems created by present social media centralization. Learn more at [deso.org](https://deso.org).
 
 # Getting started
 
