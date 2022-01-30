@@ -6,7 +6,6 @@
     ParentPosts: null
     ParentStakeID: ""
     PostEntryReaderState: {}
-    PostExtraData: {}
  */
 
 const typeDefs = `
@@ -17,6 +16,7 @@ const typeDefs = `
     VideoURLs: [String]!
     Poster: User!
     RepostedPost: Post
+    PostExtraData: JSONObject
 
     CommentCount: Int!
     LikeCount: Int!
@@ -78,18 +78,31 @@ const typeDefs = `
     ThreadLevelLimit: Int = 2
   }
 
+  input CommentsForPostInput {
+    PostHashHex: String!
+    ReaderPublicKeyBase58Check: String
+    CommentLimit: Int = 10
+    CommentOffset: Int = 0
+    LoadAuthorThread: Boolean = false
+  }
+
   type PostsForUserPayload {
     LastPostHashHex: String
-    Posts: [Post!]
+    Posts: [Post]!
   }
 
   type SinglePostPayload {
     Post: Post
   }
 
+  type CommentsForPostPayload {
+    Comments: [Post]!
+  }
+
   type Query {
     postsForUser(input: PostsForUserInput!): PostsForUserPayload!
     singlePost(input: SinglePostInput!): SinglePostPayload!
+    commentsForPost(input: CommentsForPostInput!): CommentsForPostPayload!
   }
 `;
 

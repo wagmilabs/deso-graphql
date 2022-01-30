@@ -64,6 +64,11 @@ const resolvers = {
       return parent.PostFound;
     },
   },
+  CommentsForPostPayload: {
+    Comments: (parent) => {
+      return parent.PostFound.Comments;
+    },
+  },
   Query: {
     postsForUser: async (root, args, ctx) => {
       if (!args.input.Username && !args.input.PublicKeyBase58Check) {
@@ -94,6 +99,19 @@ const resolvers = {
       );
 
       return post;
+    },
+    commentsForPost: async (root, args, ctx) => {
+      const comments = await new Posts().getSinglePost(
+        args.input.PostHashHex,
+        args.input.ReaderPublicKeyBase58Check,
+        false,
+        args.input.CommentLimit,
+        args.input.CommentOffset,
+        false,
+        args.input.LoadAuthorThread
+      );
+
+      return comments;
     },
   },
 };
