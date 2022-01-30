@@ -13,6 +13,10 @@ class Users extends DeSo {
     publicKey: string = '',
     username: string = ''
   ) {
+    if (!publicKey && !username) {
+      throw new Error('Either publicKey or username must be provided');
+    }
+
     const response = await this.client.post('/api/v0/get-single-profile', {
       NoErrorOnMissing: noErrorOnMissing,
       PublicKeyBase58Check: publicKey,

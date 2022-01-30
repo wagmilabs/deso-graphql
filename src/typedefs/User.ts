@@ -12,7 +12,7 @@ const typeDefs = `
     IsFeaturedTutorialUpAndComingCreator: Boolean!
     IsFeaturedTutorialWellKnownCreator: Boolean!
     UsersThatHODL: [String]
-    Posts: [Post!]
+    Posts: [Post!]!
     CoinEntry: CoinEntry!
   }
 
@@ -29,6 +29,19 @@ const typeDefs = `
     MintingDisabled: Boolean!
     NumberOfHolders: Int!
     TransferRestrictionStatus: String!
+  }
+
+  input SingleUserInput {
+    Username: String
+    PublicKeyBase58Check: String
+  }
+
+  type SingleUserPayload {
+    User: User
+  }
+
+  type Query {
+    singleUser(input: SingleUserInput!): SingleUserPayload!
   }
 `;
 
