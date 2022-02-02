@@ -61,11 +61,14 @@ const resolvers = {
         false
       );
 
-      const nftArray = Object.keys(nfts.NFTsMap).map((key) => {
-        return {
-          NFTHashHex: key,
-          ...nfts.NFTsMap[key].NFTEntryResponses[0],
-        };
+      const nftArray = [];
+      Object.keys(nfts.NFTsMap).forEach((k) => {
+        nfts.NFTsMap[k].NFTEntryResponses.forEach((NFTEntryResponse) => {
+          nftArray.push({
+            NFTHashHex: k,
+            ...NFTEntryResponse,
+          });
+        });
       });
 
       return nftArray;
