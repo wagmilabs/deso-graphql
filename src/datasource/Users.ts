@@ -88,6 +88,31 @@ class Users extends DeSo {
 
     return response.data;
   }
+
+  /**
+   *
+   * @param publicKey
+   * @param readerPublicKey
+   * @param isForSale
+   * @param isPending
+   *
+   * @returns {Object}
+   */
+  public async getNFTsForUser(
+    publicKey: string,
+    readerPublicKey: string = '',
+    isForSale: boolean,
+    isPending: boolean
+  ) {
+    const response = await this.client.post('/api/v0/get-nfts-for-user', {
+      UserPublicKeyBase58Check: publicKey,
+      ReaderPublicKeyBase58Check: readerPublicKey,
+      IsForSale: isForSale,
+      IsPending: isPending,
+    });
+
+    return response.data;
+  }
 }
 
 export default Users;

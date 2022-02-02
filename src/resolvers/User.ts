@@ -53,6 +53,23 @@ const resolvers = {
 
       return Object.values(following.PublicKeyToProfileEntry);
     },
+    NFTs: async (parent, args, context) => {
+      const nfts = await new Users().getNFTsForUser(
+        parent.PublicKeyBase58Check,
+        '',
+        false,
+        false
+      );
+
+      const nftArray = Object.keys(nfts.NFTsMap).map((key) => {
+        return {
+          NFTHashHex: key,
+          ...nfts.NFTsMap[key].NFTEntryResponses[0],
+        };
+      });
+
+      return nftArray;
+    },
   },
   Holding: {
     HODLer: async (parent, args, context) => {

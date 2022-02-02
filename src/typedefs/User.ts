@@ -21,6 +21,8 @@ const typeDefs = `
 
     TotalFollowing: Int!
     Following: [User]!
+
+    NFTs: [NFT]!
   }
 
   type Holding {
