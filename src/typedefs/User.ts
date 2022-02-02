@@ -73,9 +73,22 @@ const typeDefs = `
     LastPublicKeyBase58Check: String
   }
 
+  input FollowersForUserInput {
+    PublicKeyBase58Check: String
+    Username: String
+    LastPublicKeyBase58Check: String
+    Limit: Int = 10
+  }
+
+  type FollowersForUserPayload {
+    Followers: [User]!
+    LastPublicKeyBase58Check: String
+  }
+
   type Query {
     singleUser(input: SingleUserInput!): SingleUserPayload!
     hodlersForUser(input: HodlersForUserInput!): HodlersForUserPayload!
+    followersForUser(input: FollowersForUserInput!): FollowersForUserPayload!
   }
 `;
 

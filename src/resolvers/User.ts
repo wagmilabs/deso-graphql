@@ -110,6 +110,15 @@ const resolvers = {
       return parent.LastPublicKeyBase58Check;
     },
   },
+  FollowersForUserPayload: {
+    Followers: async (parent, args, context) => {
+      return Object.values(parent.PublicKeyToProfileEntry);
+    },
+    LastPublicKeyBase58Check: async (parent, args, context) => {
+      // We come up with it since it's not given to us
+      return Object.keys(parent.PublicKeyToProfileEntry).pop();
+    },
+  },
   Query: {
     singleUser: async (root, args, ctx) => {
       const user = await new Users().getSingleProfile(
@@ -131,6 +140,17 @@ const resolvers = {
       );
 
       return holders;
+    },
+    followersForUser: async (root, args, ctx) => {
+      const followers = await new Users().getFollowsStateless(
+        args.input.Username,
+        args.input.PublicKeyBase58Check,
+        true,
+        args.input.LastPublicKeyBase58Check,
+        args.input.Limit
+      );
+
+      return followers;
     },
   },
 };
