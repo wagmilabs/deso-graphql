@@ -11,9 +11,27 @@ const typeDefs = `
     IsGraylisted: Boolean!
     IsFeaturedTutorialUpAndComingCreator: Boolean!
     IsFeaturedTutorialWellKnownCreator: Boolean!
-    UsersThatHODL: [String]
-    Posts: [Post!]!
     CoinEntry: CoinEntry!
+
+    UsersThatHODL: [Holding]!
+    Posts: [Post!]!
+
+    TotalFollowers: Int!
+    Followers: [User]!
+
+    TotalFollowing: Int!
+    Following: [User]!
+  }
+
+  type Holding {
+    HODLerPublicKeyBase58Check: String!
+    HODLer: User!
+    CreatorPublicKeyBase58Check: String!
+    Creator: User!
+    HasPurchased: Boolean!
+    BalanceNanos: String!
+    BalanceNanosUint256: String!
+    NetBalanceInMempool: String
   }
 
   type CoinEntry {
