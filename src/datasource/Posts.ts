@@ -12,6 +12,8 @@ class Posts extends DeSo {
    * @param loadAuthorThread
    * @param threadLeafLimit
    * @param threadLevelLimit
+   *
+   * @returns {Object}
    */
   public async getSinglePost(
     postHashHex: string,
@@ -46,7 +48,8 @@ class Posts extends DeSo {
    * @param lastPostHashHex
    * @param numToFetch
    * @param mediaRequired
-   * @returns
+   *
+   * @returns {Object}
    */
   public async getPostsForUser(
     publicKey: string = '',
