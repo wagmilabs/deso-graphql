@@ -101,6 +101,15 @@ const resolvers = {
       };
     },
   },
+  HodlersForUserPayload: {
+    Hodlers: async (parent, args, context) => {
+      // Careful - Hodlers (HODL)
+      return parent.Hodlers;
+    },
+    LastPublicKeyBase58Check: async (parent, args, context) => {
+      return parent.LastPublicKeyBase58Check;
+    },
+  },
   Query: {
     singleUser: async (root, args, ctx) => {
       const user = await new Users().getSingleProfile(
@@ -110,6 +119,18 @@ const resolvers = {
       );
 
       return user;
+    },
+    hodlersForUser: async (root, args, ctx) => {
+      const holders = await new Users().getHoldersForProfile(
+        args.input.PublicKeyBase58Check,
+        args.input.Username,
+        args.input.NumToFetch,
+        args.input.LastPublicKeyBase58Check,
+        false,
+        args.input.FetchAll
+      );
+
+      return holders;
     },
   },
 };

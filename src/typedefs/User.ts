@@ -60,8 +60,22 @@ const typeDefs = `
     User: User
   }
 
+  input HodlersForUserInput {
+    PublicKeyBase58Check: String
+    Username: String
+    LastPublicKeyBase58Check: String
+    NumToFetch: Int = 10
+    FetchAll: Boolean = false
+  }
+
+  type HodlersForUserPayload {
+    Hodlers: [Holding]!
+    LastPublicKeyBase58Check: String
+  }
+
   type Query {
     singleUser(input: SingleUserInput!): SingleUserPayload!
+    hodlersForUser(input: HodlersForUserInput!): HodlersForUserPayload!
   }
 `;
 

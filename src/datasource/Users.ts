@@ -46,6 +46,10 @@ class Users extends DeSo {
     fetchHodlings: boolean = false,
     fetchAll: boolean = false
   ) {
+    if (!publicKey && !username) {
+      throw new Error('Either publicKey or username must be provided');
+    }
+
     const response = await this.client.post(
       '/api/v0/get-hodlers-for-public-key',
       {
