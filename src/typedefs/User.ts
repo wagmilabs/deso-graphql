@@ -97,11 +97,22 @@ const typeDefs = `
     LastPublicKeyBase58Check: String
   }
 
+  input NFTsForUserInput {
+    PublicKeyBase58Check: String
+    IsForSale: Boolean
+    IsPending: Boolean
+  }
+
+  type NFTsForUserPayload {
+    NFTs: [NFT]!
+  }
+
   type Query {
     singleUser(input: SingleUserInput!): SingleUserPayload!
     hodlersForUser(input: HodlersForUserInput!): HodlersForUserPayload!
     followersForUser(input: FollowersForUserInput!): FollowersForUserPayload!
     followingForUser(input: FollowingForUserInput!): FollowingForUserPayload!
+    nftsForUser(input: NFTsForUserInput!): NFTsForUserPayload!
   }
 `;
 

@@ -128,6 +128,21 @@ const resolvers = {
       return Object.keys(parent.PublicKeyToProfileEntry).pop();
     },
   },
+  NFTsForUserPayload: {
+    NFTs: (parent, args, context) => {
+      const nftArray = [];
+      Object.keys(parent.NFTsMap).forEach((k) => {
+        parent.NFTsMap[k].NFTEntryResponses.forEach((NFTEntryResponse) => {
+          nftArray.push({
+            NFTHashHex: k,
+            ...NFTEntryResponse,
+          });
+        });
+      });
+
+      return nftArray;
+    },
+  },
   Query: {
     singleUser: async (root, args, ctx) => {
       const user = await new Users().getSingleProfile(
@@ -171,6 +186,16 @@ const resolvers = {
       );
 
       return following;
+    },
+    nftsForUser: async (root, args, ctx) => {
+      const nfts = await new Users().getNFTsForUser(
+        args.input.PublicKeyBase58Check,
+        '',
+        args.input.IsForSale,
+        args.input.IsPending
+      );
+
+      return nfts;
     },
   },
 };
