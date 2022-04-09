@@ -15,6 +15,15 @@ const typeDefs = `
     Owner: User!
     Post: Post!
   }
+
+  input DoesUserHaveNFTFromCollectionInput {
+    PublicKeyBase58Check: String!
+    NFTCollectionName: String!
+  }
+
+  type Query {
+    doesUserHaveNFTFromCollection(input: DoesUserHaveNFTFromCollectionInput!): Boolean!
+  }
 `;
 
 export default typeDefs;

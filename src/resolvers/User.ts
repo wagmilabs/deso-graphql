@@ -8,14 +8,14 @@ const resolvers = {
         parent.PublicKeyBase58Check
       );
 
-      return posts.Posts;
+      return posts.Posts || [];
     },
     UsersThatHODL: async (parent, args, context) => {
       const users = await new Users().getHoldersForProfile(
         parent.PublicKeyBase58Check
       );
 
-      return users.Hodlers;
+      return users.Hodlers || [];
     },
     TotalFollowers: async (parent, args, context) => {
       const followers = await new Users().getFollowsStateless(

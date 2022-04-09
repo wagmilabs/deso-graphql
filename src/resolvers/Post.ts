@@ -51,12 +51,12 @@ const resolvers = {
 
       const post = await posts.getSinglePost(parent.PostHashHex);
 
-      return post.PostFound.Comments;
+      return post.PostFound.Comments || [];
     },
   },
   PostsForUserPayload: {
     Posts: (parent) => {
-      return parent.Posts;
+      return parent.Posts || [];
     },
   },
   SinglePostPayload: {
@@ -66,7 +66,7 @@ const resolvers = {
   },
   CommentsForPostPayload: {
     Comments: (parent) => {
-      return parent.PostFound.Comments;
+      return parent.PostFound.Comments || [];
     },
   },
   Query: {
