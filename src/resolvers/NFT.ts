@@ -1,5 +1,6 @@
 import Users from '../datasource/Users';
 import Posts from '../datasource/Posts';
+import NFTs from '../datasource/NFTs';
 
 const resolvers = {
   NFT: {
@@ -21,7 +22,50 @@ const resolvers = {
       return post.PostFound;
     },
   },
+  NFTCollectionSummary: {
+    Owner: async (parent, args, context) => {
+      const users = await new Users().getSingleProfile(
+        true,
+        parent.OwnerPublicKeyBase58Check
+      );
+
+      return {
+        ...users.Profile,
+        IsBlacklisted: users.IsBlacklisted,
+        IsGraylisted: users.IsGraylisted,
+      };
+    },
+    Post: async (parent, args, context) => {
+      const post = await new Posts().getSinglePost(parent.NFTHashHex);
+
+      return post.PostFound;
+    },
+  },
   Query: {
+    getNFTCollectionSummary: async (parent, args, context) => {
+      const collectionSummary = await new NFTs().getNFTCollectionSummary(
+        args.input.NFTHashHex,
+        ''
+      );
+
+      return {
+        NFTHashHex:
+          collectionSummary.NFTCollectionResponse.PostEntryResponse.PostHashHex,
+        OwnerPublicKeyBase58Check:
+          collectionSummary.NFTCollectionResponse.ProfileEntryResponse
+            .PublicKeyBase58Check,
+        HighestBidAmountNanos: `${collectionSummary.NFTCollectionResponse.HighestBidAmountNanos}`,
+        LowestBidAmountNanos: `${collectionSummary.NFTCollectionResponse.LowestBidAmountNanos}`,
+        HighestBuyNowPriceNanos: `${collectionSummary.NFTCollectionResponse.HighestBuyNowPriceNanos}`,
+        LowestBuyNowPriceNanos: `${collectionSummary.NFTCollectionResponse.LowestBuyNowPriceNanos}`,
+        NumCopiesForSale:
+          collectionSummary.NFTCollectionResponse.NumCopiesForSale,
+        NumCopiesBuyNow:
+          collectionSummary.NFTCollectionResponse.NumCopiesBuyNow,
+        AvailableSerialNumbers:
+          collectionSummary.NFTCollectionResponse.AvailableSerialNumbers,
+      };
+    },
     doesUserHaveNFTFromCollection: async (parent, args, context) => {
       const nftCollection = await new Users().getSingleProfile(
         false,

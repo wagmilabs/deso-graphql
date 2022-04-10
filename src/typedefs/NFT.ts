@@ -21,7 +21,29 @@ const typeDefs = `
     NFTCollectionName: String!
   }
 
+  input GetNFTCollectionSummaryInput {
+    NFTHashHex: String!
+    ReaderPublicKeyBase58Check: String
+  }
+
+  type NFTCollectionSummary {
+    NFTHashHex: String!
+    OwnerPublicKeyBase58Check: String!
+
+    Owner: User!
+    Post: Post!
+
+    HighestBidAmountNanos: String!
+    LowestBidAmountNanos: String
+    HighestBuyNowPriceNanos: String
+    LowestBuyNowPriceNanos: String
+    NumCopiesForSale: Int
+    NumCopiesBuyNow: Int
+    AvailableSerialNumbers: [Int]
+  }
+
   type Query {
+    getNFTCollectionSummary(input: GetNFTCollectionSummaryInput!): NFTCollectionSummary!
     doesUserHaveNFTFromCollection(input: DoesUserHaveNFTFromCollectionInput!): Boolean!
   }
 `;
