@@ -1,5 +1,6 @@
 import Users from '../datasource/Users';
 import Posts from '../datasource/Posts';
+import DAOs from '../datasource/DAOs';
 
 const resolvers = {
   User: {
@@ -73,6 +74,9 @@ const resolvers = {
 
       return nftArray;
     },
+    IsDAO: (parent, args, context) => {
+      return parent.DAOCoinEntry.CoinsInCirculationNanos !== '0x0';
+    },
   },
   Holding: {
     HODLer: async (parent, args, context) => {
@@ -143,6 +147,11 @@ const resolvers = {
       return nftArray;
     },
   },
+  DAOCoinsHoldingsForUserPayload: {
+    DAOCoinHoldings: (parent, args, context) => {
+      return parent;
+    },
+  },
   Query: {
     singleUser: async (root, args, ctx) => {
       const user = await new Users().getSingleProfile(
@@ -196,6 +205,14 @@ const resolvers = {
       );
 
       return nfts;
+    },
+    daoCoinsHoldingsForUser: async (root, args, ctx) => {
+      const daoCoinsHoldings = await new DAOs().getDAOHoldingsForPublicKey(
+        args.input.PublicKeyBase58Check,
+        args.input.LastPublicKeyBase58Check
+      );
+
+      return daoCoinsHoldings.Hodlers;
     },
   },
 };

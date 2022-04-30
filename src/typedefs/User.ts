@@ -23,6 +23,9 @@ const typeDefs = `
     Following: [User]!
 
     NFTs: [NFT]!
+
+    IsDAO: Boolean!
+    DAOCoinEntry: DAOCoinEntry
   }
 
   type Holding {
@@ -34,6 +37,13 @@ const typeDefs = `
     BalanceNanos: String!
     BalanceNanosUint256: String!
     NetBalanceInMempool: String
+  }
+
+  type DAOCoinEntry {
+    NumberOfHolders: Int
+    CoinsInCirculationNanos: String!
+    MintingDisabled: Boolean
+    TransferRestrictionStatus: String!
   }
 
   type CoinEntry {
@@ -107,12 +117,22 @@ const typeDefs = `
     NFTs: [NFT]!
   }
 
+  input DAOCoinsHoldingsForUserInput {
+    PublicKeyBase58Check: String!
+    LastPublicKeyBase58Check: String
+  }
+
+  type DAOCoinsHoldingsForUserPayload {
+    DAOCoinHoldings: [Holding]!
+  }
+
   type Query {
     singleUser(input: SingleUserInput!): SingleUserPayload!
     hodlersForUser(input: HodlersForUserInput!): HodlersForUserPayload!
     followersForUser(input: FollowersForUserInput!): FollowersForUserPayload!
     followingForUser(input: FollowingForUserInput!): FollowingForUserPayload!
     nftsForUser(input: NFTsForUserInput!): NFTsForUserPayload!
+    daoCoinsHoldingsForUser(input: DAOCoinsHoldingsForUserInput!): DAOCoinsHoldingsForUserPayload
   }
 `;
 

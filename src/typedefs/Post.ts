@@ -1,7 +1,7 @@
 /**
  * The keys below are from the API response and have yet to be added to the typedef
  *
- * AdditionalCoinRoyaltiesMap: {}
+    AdditionalCoinRoyaltiesMap: {}
     AdditionalDESORoyaltiesMap: {}
     ParentPosts: null
     ParentStakeID: ""
