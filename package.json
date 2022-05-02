@@ -4,9 +4,7 @@
   "description": "A GraphQL wrapper of the DeSo API.",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "npm-run-all --parallel start playground",
-    "playground": "graphql playground"
+    "start": "ts-node src/index.ts"
   },
   "repository": {
     "type": "git",
